@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import update from 'immutability-helper'
+
 
 class TodosContainer extends Component {
   constructor(props) {
@@ -15,6 +17,21 @@ class TodosContainer extends Component {
       this.setState({todos: response.data})
     })
     .catch(error => console.log(error))
+  }
+
+  createTodo = (e) => {
+    if (e.key === 'Enter') {
+      axios.post('/api/v1/todos', {todo: {title: e.target.value}})
+      .then(response => {
+        const todos = update(this.state.todos, {
+          $splice: [[0, 0, response.data]]
+        })
+        this.setState({
+          todos: todos
+        })
+      })
+      .catch(error => console.log(error))      
+    }    
   }
 
   componentDidMount() {
