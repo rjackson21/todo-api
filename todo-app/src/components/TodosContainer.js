@@ -7,7 +7,8 @@ class TodosContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      todos: []
+      todos: [],
+      inputValue: ''
     }
   }
 
@@ -19,6 +20,10 @@ class TodosContainer extends Component {
     .catch(error => console.log(error))
   }
 
+  handleChange = (e) => {
+    this.setState({inputValue: e.target.value});
+  }
+
   createTodo = (e) => {
     if (e.key === 'Enter') {
       axios.post('/api/v1/todos', {todo: {title: e.target.value}})
@@ -27,7 +32,8 @@ class TodosContainer extends Component {
           $splice: [[0, 0, response.data]]
         })
         this.setState({
-          todos: todos
+          todos: todos,
+          inputValue: ''
         })
       })
       .catch(error => console.log(error))      
@@ -44,7 +50,8 @@ class TodosContainer extends Component {
         <div className="inputContainer">
           <input className="taskInput" type="text" 
             placeholder="Add a task" maxLength="50"
-            onKeyPress={this.createTodo} />
+            onKeyPress={this.createTodo}
+            value={this.state.inputValue} onChange={this.handleChange} />
         </div>  	    
 	<div className="listWrapper">
 	   <ul className="taskList">
