@@ -1,24 +1,21 @@
-# README
+# View Deployment (with the front-end)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+https://react-todo-list-33.herokuapp.com/
 
-Things you may want to cover:
+# View Deployment (if you want to see the json from the api)
 
-* Ruby version
+https://stark-sea-73979.herokuapp.com/api/v1/todos
 
-* System dependencies
+## Run Locally
 
-* Configuration
+To run this app locally, you will want to clone both this repo and the front-end which can be found at https://github.com/rjackson21/todo-app-frontend
 
-* Database creation
+Within 'TodosContainer.js' you will want to change the api call. Currently, for the app to be deployed properly, the api is also deployed, and the app is calling to the deployed api. Change all api calls to './api/v1/todos' with both the rails serve and the front-end server running. 
 
-* Database initialization
+To run the back-end locally, use:
 
-* How to run the test suite
+### rails s 
 
-* Services (job queues, cache servers, search engines, etc.)
+To run the front-end locally, use:
 
-* Deployment instructions
-
-* ...
+### yarn start
